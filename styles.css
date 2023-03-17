@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  #grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .grid-row {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .guess-letter {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #888;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  .guess-letter:focus {
+    border-color: #4a8cfb;
+  }
+  
+  .guess-letter.correct {
+    background-color: green;
+    color: white;
+  }
+  
+  .guess-letter.incorrect {
+    background-color: yellow;
+  }
+  
+  #message {
+    font-size: 24px;
+    margin-top: 15px;
+  }
+  
