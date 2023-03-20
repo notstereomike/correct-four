@@ -18,23 +18,10 @@ function createGrid() {
       letter.dataset.col = col;
       letter.disabled = row !== 0;
 
-      letter.addEventListener("input", handleInput);
       letter.addEventListener("keydown", handleKeyDown);
 
       rowEl.appendChild(letter);
     }
-  }
-}
-
-function handleInput(e) {
-  let letterInput = e.target;
-  let row = parseInt(letterInput.dataset.row);
-  let col = parseInt(letterInput.dataset.col);
-
-  if (col < 3) {
-    setTimeout(() => {
-      document.querySelector(`input[data-row="${row}"][data-col="${col + 1}"]`).focus();
-    }, 0);
   }
 }
 
@@ -58,8 +45,26 @@ function handleKeyDown(e) {
       e.preventDefault();
       document.querySelector(`input[data-row="${row}"][data-col="${col - 1}"]`).focus();
     }
+  } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && /^[a-zA-Z]$/.test(e.key)) {
+    e.preventDefault();
+    letterInput.value = e.key.toUpperCase();
+
+    if (col < 3) {
+      setTimeout(() => {
+        document.querySelector(`input[data-row="${row}"][data-col="${col + 1}"]`).focus();
+      }, 0);
+    } else if (row < attempts - 1) {
+      setTimeout(() => {
+        let nextRow = row + 1;
+        let newRow = document.querySelector(`input[data-row="${nextRow}"][data-col="0"]`);
+        newRow.focus();
+        newRow.disabled = false;
+      }, 0);
+    }
   }
 }
+
+  
 
 function checkWord(row) {
   let guess = "";
